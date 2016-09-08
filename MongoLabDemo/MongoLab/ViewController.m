@@ -49,18 +49,12 @@
 
 -(void) getDatabaseListBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    
     NSArray *resultList = [[MongoLabSDK sharedInstance] getDatabaseList];
     
     for (NSString *dbName in resultList) {
         
         NSLog(@"getDatabaseListBackgroundThread dbName=%@", dbName);
     }
-    
-    [pool release];
-    
 }
 
 
@@ -73,18 +67,12 @@
 
 -(void) getCollectionListBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    
     NSArray *resultList = [[MongoLabSDK sharedInstance] getCollectionList:MY_DATABASE];
     
     for (NSString *collectionName in resultList) {
         
         NSLog(@"getCollectionLisBackgroundThread collectionName=%@", collectionName);
     }
-    
-    [pool release];
-    
 }
 
 
@@ -96,17 +84,12 @@
 
 -(void) getCollectionItemListBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    
     NSArray *resultList = [[MongoLabSDK sharedInstance] getCollectionItemList:MY_DATABASE collectionName:MY_COLLECTION];
     
     for (NSObject *item in resultList) {
         
         NSLog(@"getCollectionItemListBackgroundThread item=%@", item);
     }
-    
-    [pool release];
     
 }
 
@@ -119,18 +102,12 @@
 
 -(void) insertCollectionItemStringBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    
     NSDictionary *resultList = [[MongoLabSDK sharedInstance] insertCollectionItem:MY_DATABASE collectionName:MY_COLLECTION stringData:@"{ \"name\":\"Bob\"}"];
     
     NSDictionary *itemIdDictionary = [resultList valueForKey:@"_id"];
     NSString *itemId = [itemIdDictionary valueForKey:@"$oid"];
     
     NSLog(@"insert itemId=%@", itemId);
-    
-    [pool release];
-    
 }
 
 
@@ -143,9 +120,6 @@
 
 -(void) insertCollectionItemBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    
     NSMutableDictionary *item = [NSMutableDictionary dictionary];
     [item setValue:@"Alen" forKey:@"name"];
     [item setValue:@"200 B Street." forKey:@"address"];
@@ -156,9 +130,6 @@
     NSString *itemId = [itemIdDictionary valueForKey:@"$oid"];
     
     NSLog(@"insert itemId=%@", itemId);
-    
-    [pool release];
-    
 }
 
 
@@ -171,7 +142,6 @@
 
 -(void) getCollectionItemBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     
     //@"{\"_id\":\"517af961e4b0352ee5ae9674\"}"
@@ -192,10 +162,6 @@
         
         NSLog(@"getCollectionItemButtonPressed=%@", item);
     }
-    
-    
-    [pool release];
-    
 }
 
 
@@ -208,10 +174,8 @@
 
 -(void) deleteBackgroundThread {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     NSDictionary *deletedItem = [[MongoLabSDK sharedInstance] deleteCollectionItem:MY_DATABASE collectionName:MY_COLLECTION itemId:@"517b3403e4b074a72fc6845e"];
-    
     
     if (deletedItem == nil) {
         NSLog(@"deleteCollectionItemButtonPressed not found!");
@@ -219,10 +183,6 @@
     else {
         NSLog(@"deleteCollectionItemButtonPressed Item deleted found=%@", deletedItem);
     }
-    
-    
-    [pool release];
-    
 }
 
 
@@ -231,8 +191,6 @@
 }
 
 -(void) updateCollectionItemBackgroundThread {
-    
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     NSDictionary *updatedItem = [[MongoLabSDK sharedInstance] updateCollectionItem:MY_DATABASE collectionName:MY_COLLECTION
                                                     stringData:@"{$set: { \"x\" : 3 } }" query:@"{\"_id\" : { \"$oid\" : \"517b33ffe4b074a72fc6845d\"}}"];
@@ -245,14 +203,7 @@
     else {
         NSLog(@"updateCollectionItemBackgroundThread Item deleted found=%@", updatedItem);
     }
-    
-    
-    [pool release];
-    
 }
-
-
-
 
 
 @end

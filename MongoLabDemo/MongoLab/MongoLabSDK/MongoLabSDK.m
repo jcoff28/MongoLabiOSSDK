@@ -54,7 +54,6 @@
 
 
 #import "MongoLabSDK.h"
-#import "JSON.h"
 
 @implementation MongoLabSDK
 
@@ -66,15 +65,9 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
 +(MongoLabSDK *) sharedInstance {
     
     if (MongoLabSDK_INSTANCE == nil) {
-        
         MongoLabSDK_INSTANCE = [[MongoLabSDK alloc] init];
-        
-        [MongoLabSDK_INSTANCE retain];
-                
     }
-    
     return MongoLabSDK_INSTANCE;
-    
 }
 
 
@@ -91,7 +84,7 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
 
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases?apiKey=%@", mongoLabAPIKey];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
 
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -102,17 +95,16 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-        
-        NSObject *json = [responseString JSONValue];
-        
-        if ([json isKindOfClass:[NSArray class]]) {
-            return (NSArray*)json;
+        if (receivedData != nil) {
+            
+            NSError* e;
+            id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+            
+            if ([obj isKindOfClass:[NSArray class]]) {
+                return (NSArray*)obj;
+            }
         }
-        
-        
     }
-    
     
     return nil;
 }
@@ -125,7 +117,7 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections?apiKey=%@", databaseName, mongoLabAPIKey];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -136,17 +128,16 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-        
-        NSObject *json = [responseString JSONValue];
-        
-        if ([json isKindOfClass:[NSArray class]]) {
-            return (NSArray*)json;
+        if (receivedData != nil) {
+            
+            NSError* e;
+            id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+            
+            if ([obj isKindOfClass:[NSArray class]]) {
+                return (NSArray*)obj;
+            }
         }
-        
-        
     }
-    
     
     return nil;
 }
@@ -158,7 +149,7 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@?apiKey=%@", databaseName, collectionName, mongoLabAPIKey];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -169,17 +160,18 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
         
-        NSObject *json = [responseString JSONValue];
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
         
-        if ([json isKindOfClass:[NSArray class]]) {
-            return (NSArray*)json;
+        if ([obj isKindOfClass:[NSArray class]]) {
+            return (NSArray*)obj;
         }
-        
-        
+        //If it's just one object it may be a dict. Wrap it in an array to keep the return type consistant
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return @[obj];
+        }
     }
-    
     
     return nil;
 }
@@ -227,7 +219,7 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
         urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@?apiKey=%@%@%@%@%@%@%@", databaseName, collectionName, mongoLabAPIKey, queryParams, fieldsParams, findOneParams, sortOrderParams, skipParams, limitParams];
 
         
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -238,18 +230,18 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-
-        NSObject *json = [responseString JSONValue];
         
-        if ([json isKindOfClass:[NSArray class]]) {
-            return (NSArray*)json;
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+        
+        if ([obj isKindOfClass:[NSArray class]]) {
+            return (NSArray*)obj;
         }
-        
-        
+        //If it's just one object it may be a dict. Wrap it in an array to keep the return type consistant
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return @[obj];
+        }
     }
-    
-    
     return nil;
 }
 
@@ -261,10 +253,11 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@?apiKey=%@", databaseName, collectionName, mongoLabAPIKey];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
-    NSString *body = [item JSONRepresentation];
+    NSData* data = [NSJSONSerialization dataWithJSONObject:item options:0 error:nil];
+    NSString *body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
     NSString *msgLength = [NSString stringWithFormat:@"%d", [body length]];
 
@@ -282,17 +275,14 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
 
     if (receivedData != nil) {
         
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-        
-        NSDictionary *json = [responseString JSONValue];
-        
-        return json;
-                
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return (NSDictionary*)obj;
+        }
     }
     
-    
     return nil;
-
 }
 
 -(NSDictionary *) insertCollectionItem:(NSString *) databaseName collectionName:(NSString *) collectionName stringData:(NSString *) stringData {
@@ -302,7 +292,7 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@?apiKey=%@", databaseName, collectionName, mongoLabAPIKey];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
     NSString *body = stringData;
@@ -322,17 +312,13 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                              error:&error];
     if (receivedData != nil) {
         
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-        
-        NSDictionary *json = [responseString JSONValue];
-        
-        return json;
-        
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return (NSDictionary*)obj;
+        }
     }
-    
-    
     return nil;
-    
 }
 
 
@@ -356,10 +342,11 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@?apiKey=%@%@%@", databaseName, collectionName, mongoLabAPIKey, queryParams, upsertParams];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
-    NSString *body = [item JSONRepresentation];
+    NSData* data = [NSJSONSerialization dataWithJSONObject:item options:0 error:nil];
+    NSString *body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     NSString *msgLength = [NSString stringWithFormat:@"%d", [body length]];
     
@@ -375,18 +362,14 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-        
-        NSDictionary *json = [responseString JSONValue];
-        
-        return json;
-        
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return (NSDictionary*)obj;
+        }
     }
     
-    
     return nil;
-
 }
 
 -(NSDictionary *) updateCollectionItem:(NSString *) databaseName collectionName:(NSString *) collectionName stringData:(NSString *) stringData query:(NSString *) query {
@@ -395,7 +378,6 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     NSURLResponse *response = nil;
     NSError *error = nil;
     
-    NSLog(@"updateCollectionItem started");
     NSString *queryParams = @"";
     if (query != nil && [query length] > 0) {
         queryParams = [NSString stringWithFormat:@"&q=%@", [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -404,16 +386,12 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@?apiKey=%@%@", databaseName, collectionName, mongoLabAPIKey, queryParams];
 
-    NSLog(@"updateCollectionItem urlString=%@", urlString);
-
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
     NSString *body = stringData;
     
     NSString *msgLength = [NSString stringWithFormat:@"%d", [body length]];
-    NSLog(@"updateCollectionItem body=%@", body);
-    
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest addValue: @"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -426,22 +404,14 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-        
-        
-        NSLog(@"updateCollectionItem responseString=%@", responseString);
-
-        NSDictionary *json = [responseString JSONValue];
-        
-        return json;
-        
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return (NSDictionary*)obj;
+        }
     }
     
-    
     return nil;
-
-    
 }
 
 
@@ -453,7 +423,7 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.mongolab.com/api/1/databases/%@/collections/%@/%@?apiKey=%@", databaseName, collectionName, itemId, mongoLabAPIKey];
     
-    NSURL *url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
     
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -464,13 +434,12 @@ MongoLabSDK *MongoLabSDK_INSTANCE = nil;
                                                  returningResponse:&response
                                                              error:&error];
     if (receivedData != nil) {
-        NSString *responseString = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
-
-        NSLog(@"deleteCollectionItem responseString=%@", responseString);
-        NSObject *json = [responseString JSONValue];
+        NSError* e;
+        id obj = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:&e];
+        return obj;
             
-        if ([json isKindOfClass:[NSDictionary class]]) {
-            return (NSDictionary*)json;
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            return (NSDictionary*)obj;
         }
         
         

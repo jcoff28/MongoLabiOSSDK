@@ -11,20 +11,14 @@
 		7A7B7B3B172B406F00F0E6D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7B7B3A172B406F00F0E6D8 /* Foundation.framework */; };
 		7A7B7B3D172B406F00F0E6D8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7B7B3C172B406F00F0E6D8 /* CoreGraphics.framework */; };
 		7A7B7B43172B406F00F0E6D8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7B41172B406F00F0E6D8 /* InfoPlist.strings */; };
-		7A7B7B45172B406F00F0E6D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B44172B406F00F0E6D8 /* main.m */; };
-		7A7B7B49172B406F00F0E6D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B48172B406F00F0E6D8 /* AppDelegate.m */; };
+		7A7B7B45172B406F00F0E6D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B44172B406F00F0E6D8 /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A7B7B49172B406F00F0E6D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B48172B406F00F0E6D8 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7A7B7B4B172B406F00F0E6D8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7B4A172B406F00F0E6D8 /* Default.png */; };
 		7A7B7B4D172B406F00F0E6D8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7B4C172B406F00F0E6D8 /* Default@2x.png */; };
 		7A7B7B4F172B406F00F0E6D8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7B4E172B406F00F0E6D8 /* Default-568h@2x.png */; };
 		7A7B7B52172B406F00F0E6D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B51172B406F00F0E6D8 /* ViewController.m */; };
 		7A7B7B55172B406F00F0E6D8 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7B53172B406F00F0E6D8 /* ViewController.xib */; };
-		7A7B7B61172B425300F0E6D8 /* MongoLabSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B60172B425300F0E6D8 /* MongoLabSDK.m */; };
-		7A7B7B70172B5DD100F0E6D8 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B65172B5DD100F0E6D8 /* NSObject+SBJSON.m */; };
-		7A7B7B71172B5DD100F0E6D8 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B67172B5DD100F0E6D8 /* NSString+SBJSON.m */; };
-		7A7B7B72172B5DD100F0E6D8 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B69172B5DD100F0E6D8 /* SBJSON.m */; };
-		7A7B7B73172B5DD100F0E6D8 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B6B172B5DD100F0E6D8 /* SBJsonBase.m */; };
-		7A7B7B74172B5DD100F0E6D8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B6D172B5DD100F0E6D8 /* SBJsonParser.m */; };
-		7A7B7B75172B5DD100F0E6D8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B6F172B5DD100F0E6D8 /* SBJsonWriter.m */; };
+		7A7B7B61172B425300F0E6D8 /* MongoLabSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7B60172B425300F0E6D8 /* MongoLabSDK.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7A7B7B77172C494A00F0E6D8 /* mongolab_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B7B76172C494A00F0E6D8 /* mongolab_icon.png */; };
 /* End PBXBuildFile section */
 
@@ -47,19 +41,6 @@
 		7A7B7B54172B406F00F0E6D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		7A7B7B5F172B425300F0E6D8 /* MongoLabSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MongoLabSDK.h; sourceTree = "<group>"; };
 		7A7B7B60172B425300F0E6D8 /* MongoLabSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MongoLabSDK.m; sourceTree = "<group>"; };
-		7A7B7B63172B5DD100F0E6D8 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		7A7B7B64172B5DD100F0E6D8 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		7A7B7B65172B5DD100F0E6D8 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
-		7A7B7B66172B5DD100F0E6D8 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		7A7B7B67172B5DD100F0E6D8 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		7A7B7B68172B5DD100F0E6D8 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
-		7A7B7B69172B5DD100F0E6D8 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
-		7A7B7B6A172B5DD100F0E6D8 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		7A7B7B6B172B5DD100F0E6D8 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
-		7A7B7B6C172B5DD100F0E6D8 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		7A7B7B6D172B5DD100F0E6D8 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		7A7B7B6E172B5DD100F0E6D8 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		7A7B7B6F172B5DD100F0E6D8 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		7A7B7B76172C494A00F0E6D8 /* mongolab_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mongolab_icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +89,6 @@
 		7A7B7B3E172B406F00F0E6D8 /* MongoLab */ = {
 			isa = PBXGroup;
 			children = (
-				7A7B7B62172B5DD100F0E6D8 /* JSON */,
 				7A7B7B5E172B425300F0E6D8 /* MongoLabSDK */,
 				7A7B7B47172B406F00F0E6D8 /* AppDelegate.h */,
 				7A7B7B48172B406F00F0E6D8 /* AppDelegate.m */,
@@ -141,26 +121,6 @@
 				7A7B7B60172B425300F0E6D8 /* MongoLabSDK.m */,
 			);
 			path = MongoLabSDK;
-			sourceTree = "<group>";
-		};
-		7A7B7B62172B5DD100F0E6D8 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				7A7B7B63172B5DD100F0E6D8 /* JSON.h */,
-				7A7B7B64172B5DD100F0E6D8 /* NSObject+SBJSON.h */,
-				7A7B7B65172B5DD100F0E6D8 /* NSObject+SBJSON.m */,
-				7A7B7B66172B5DD100F0E6D8 /* NSString+SBJSON.h */,
-				7A7B7B67172B5DD100F0E6D8 /* NSString+SBJSON.m */,
-				7A7B7B68172B5DD100F0E6D8 /* SBJSON.h */,
-				7A7B7B69172B5DD100F0E6D8 /* SBJSON.m */,
-				7A7B7B6A172B5DD100F0E6D8 /* SBJsonBase.h */,
-				7A7B7B6B172B5DD100F0E6D8 /* SBJsonBase.m */,
-				7A7B7B6C172B5DD100F0E6D8 /* SBJsonParser.h */,
-				7A7B7B6D172B5DD100F0E6D8 /* SBJsonParser.m */,
-				7A7B7B6E172B5DD100F0E6D8 /* SBJsonWriter.h */,
-				7A7B7B6F172B5DD100F0E6D8 /* SBJsonWriter.m */,
-			);
-			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,12 +194,6 @@
 				7A7B7B49172B406F00F0E6D8 /* AppDelegate.m in Sources */,
 				7A7B7B52172B406F00F0E6D8 /* ViewController.m in Sources */,
 				7A7B7B61172B425300F0E6D8 /* MongoLabSDK.m in Sources */,
-				7A7B7B70172B5DD100F0E6D8 /* NSObject+SBJSON.m in Sources */,
-				7A7B7B71172B5DD100F0E6D8 /* NSString+SBJSON.m in Sources */,
-				7A7B7B72172B5DD100F0E6D8 /* SBJSON.m in Sources */,
-				7A7B7B73172B5DD100F0E6D8 /* SBJsonBase.m in Sources */,
-				7A7B7B74172B5DD100F0E6D8 /* SBJsonParser.m in Sources */,
-				7A7B7B75172B5DD100F0E6D8 /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +276,7 @@
 		7A7B7B59172B406F00F0E6D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MongoLab/MongoLab-Prefix.pch";
 				INFOPLIST_FILE = "MongoLab/MongoLab-Info.plist";
@@ -334,6 +289,7 @@
 		7A7B7B5A172B406F00F0E6D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MongoLab/MongoLab-Prefix.pch";
 				INFOPLIST_FILE = "MongoLab/MongoLab-Info.plist";
