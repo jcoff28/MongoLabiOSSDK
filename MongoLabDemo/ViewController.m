@@ -34,12 +34,11 @@
     [[MongoLabSDK sharedInstance] setupSDKWithKey:MY_APIKEY];
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-
-
 
 
 - (IBAction) getDatabaseListButtonPressed:(id)sender {
